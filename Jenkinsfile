@@ -9,7 +9,7 @@ node {
         script {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 // Активируем SSH credentials для операций с Git
-                withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                withCredentials([usernamePassword(credentialsId: 'github-username-token', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     // Настройка параметров для коммитов
                     sh "git config user.email '8441404@gmail.com'"
                     sh "git config user.name 'soulcola'"
