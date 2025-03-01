@@ -15,13 +15,13 @@ node {
                     sh "git config user.name 'soulcola'"
 
                     // Выводим содержимое файла для отладки
-                    sh "cat deployment.yaml"
+                    sh "cat restaurant-voting-app/deployment.yaml"
 
                     // Патчим файл deployment.yaml: заменяем тег образа на новый, например, 'raj80dockerid/test:${DOCKERTAG}'
-                    sh "sed -i 's+soulcola/voting-app.*+soulcola/voting-app:${DOCKERTAG}+g' deployment.yaml"
+                    sh "sed -i 's+soulcola/voting-app.*+soulcola/voting-app:${DOCKERTAG}+g' restaurant-voting-app/deployment.yaml"
 
                     // Выводим изменённое содержимое файла для проверки
-                    sh "cat deployment.yaml"
+                    sh "cat restaurant-voting-app/deployment.yaml"
 
                     // Добавляем изменения и делаем коммит
                     sh "git add ."
