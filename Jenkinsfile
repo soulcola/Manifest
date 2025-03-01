@@ -9,7 +9,7 @@ node {
         script {
             catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 // Активируем SSH credentials для операций с Git
-                sshagent(['e1696ef0-dd14-4ad8-8e1f-d902e1325a11']) {
+                withCredentials([usernamePassword(credentialsId: 'github', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     // Настройка параметров для коммитов
                     sh "git config user.email '8441404@gmail.com'"
                     sh "git config user.name 'soulcola'"
@@ -24,11 +24,11 @@ node {
                     sh "cat deployment.yaml"
 
                     // Добавляем изменения и делаем коммит
-                    sh "git add deployment.yaml"
+                    sh "git add ."
                     sh "git commit -m 'Done by Jenkins Job changemanifest: ${env.BUILD_NUMBER}'"
 
                     // Пушим изменения через SSH (используем remote 'origin')
-                    sh "git push origin HEAD:main"
+                    sh "git push https://${GIT_USERNAME}:${GIT_PASSWORD}@github.com/${GIT_USERNAME}/Manifest.git HEAD:main"
                 }
             }
         }
