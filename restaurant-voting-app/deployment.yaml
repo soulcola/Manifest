@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: voting-app
-          image: soulcola/voting-app:latest
+          image: soulcola/voting-app:test
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
